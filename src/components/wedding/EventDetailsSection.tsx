@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Calendar, Clock } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { ChevronDown, Volume2, VolumeX } from "lucide-react";
+
 
 const events = [
   {
@@ -14,67 +15,121 @@ const events = [
   },
 ];
 
-const EventDetailsSection = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+const HeroSection = () => {
+  const [visible, setVisible] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (opened) {
+      setTimeout(() => setVisible(true), 400);
+
+      // Play music after open
+      if (audioRef.current) {
+        audioRef.current.play();
+        setPlaying(true);
+      }
+    }
+  }, [opened]);
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (playing) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+
+    setPlaying(!playing);
+  };
 
   return (
-    <section id="events" className="relative z-10 pt-4 pb-12 px-4 bg-background">
-      <div className="container mx-auto max-w-3xl text-center">
+    <section
+      id="home"
+      className="relative flex items-center justify-center overflow-hidden bg-cover bg-top md:bg-center"
+      style={{
+        backgroundImage: "url('/invite.png')",
+        minHeight: "100svh",
+      }}
+    >
+      {/* Audio Element */}
+      <audio ref={audioRef} src="/wedding-music.mp3" loop />
 
-        <h2 className="font-serif text-4xl text-foreground mb-6">
-          The Celebrations
-        </h2>
+      {/* Music Control Button */}
+      {opened && (
+        <button
+          onClick={toggleMusic}
+          className="fixed top-6 right-6 z-50 bg-white/70 backdrop-blur-md p-3 rounded-full shadow-lg hover:scale-110 transition"
+        >
+          {playing ? (
+            <Volume2 className="w-5 h-5 text-primary" />
+          ) : (
+            <VolumeX className="w-5 h-5 text-primary" />
+          )}
+        </button>
+      )}
 
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <div className="h-px w-16 bg-primary/40" />
-          <span className="text-primary text-xl">♥</span>
-          <div className="h-px w-16 bg-primary/40" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40 backdrop-blur-[1px]" />
+
+      {/* Invitation Cover */}
+      {!opened && (
+        <div className="absolute inset-0 flex items-center justify-center z-50">
+          <div className="text-center px-6 max-w-2xl">
+
+            <p className="font-serif text-sm tracking-[0.35em] uppercase text-primary mb-6">
+              Together with their families
+            </p>
+
+            <p className="font-serif italic text-lg text-primary leading-relaxed mb-10">
+              cordially invite you to join
+              <br />
+              the joyous celebration of their union
+              <br />
+              as they begin their journey of forever.
+            </p>
+
+            <h2 className="font-serif text-7xl md:text-8xl text-primary mb-4 tracking-[0.2em]">
+              S & V
+            </h2>
+
+            <button
+              onClick={() => setOpened(true)}
+              className="px-12 py-3 bg-primary text-white rounded-full shadow-xl hover:scale-105 transition"
+            >
+              Open Invitation
+            </button>
+          </div>
         </div>
+      )}
 
-        <div className="space-y-6">
-          {events.map((event, index) => {
-            const isOpen = activeIndex === index;
+      {/* Revealed Content */}
+      {opened && (
+        <div
+          className={`relative z-10 text-center px-4 transition-all duration-1000 ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <h1 className="font-serif text-4xl md:text-6xl text-foreground">
+            Siddharthan & Varsha
+          </h1>
 
-            return (
-              <div
-                key={index}
-                className="bg-card border border-border/50 rounded-2xl shadow-lg overflow-hidden transition-all duration-500"
-              >
-                {/* Clickable Header */}
-                <button
-                  onClick={() =>
-                    setActiveIndex(isOpen ? null : index)
-                  }
-                  className="w-full py-6 text-center font-serif text-2xl text-foreground hover:text-primary transition"
-                >
-                  {event.title}
-                </button>
-
-                {/* Reveal Content */}
-                <div
-                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    isOpen ? "max-h-40 opacity-100 pb-6" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="space-y-4 text-center">
-                    <div className="flex items-center justify-center gap-3">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <span className="text-foreground/80">{event.date}</span>
-                    </div>
-
-                    <div className="flex items-center justify-center gap-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <span className="text-foreground/80">{event.time}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <button
+            onClick={() =>
+              document
+                .querySelector("#countdown")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="mt-10 animate-bounce text-primary"
+          >
+            <ChevronDown className="w-8 h-8 mx-auto" />
+          </button>
         </div>
-      </div>
+      )}
     </section>
   );
 };
 
-export default EventDetailsSection;
+export default HeroSection;
