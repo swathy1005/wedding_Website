@@ -45,7 +45,7 @@ const CountdownTimer = ({ target, title, emoji }: { target: Date; title: string;
   return (
     <div className="bg-secondary/50 backdrop-blur-sm rounded-2xl p-8 text-center border border-border/50">
       {/* <span className="text-3xl mb-2 block">{emoji}</span> */}
-      <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{title}</h3>
+      {/* <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-6">{title}</h3> */}
       <div className="flex justify-center gap-3 md:gap-5">
         <TimeUnit value={time.days} label="Days" />
         <TimeUnit value={time.hours} label="Hours" />
@@ -57,12 +57,12 @@ const CountdownTimer = ({ target, title, emoji }: { target: Date; title: string;
 };
 
 const CountdownSection = () => (
-  <section id="countdown" className="py-8 px-4 bg-background">
+  <section id="countdown" className="pb-4 pt-8 px-4 bg-background">
     <div className="container mx-auto max-w-4xl">
       <h2 className="font-serif text-3xl md:text-4xl text-center text-foreground mb-4">
         Counting Down to Forever
       </h2>
-      <div className="flex items-center justify-center gap-4 mb-12">
+      <div className="flex items-center justify-center gap-4 mb-8">
         <div className="h-px w-12 bg-primary/40" />
         <span className="text-primary">✦</span>
         <div className="h-px w-12 bg-primary/40" />

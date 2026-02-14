@@ -20,12 +20,12 @@ const events = [
 ];
 
 const EventDetailsSection = () => (
-  <section id="events" className="py-8 px-4 bg-background">
+  <section id="events" className="pt-4 pb-12 px-4 bg-background">
     <div className="container mx-auto max-w-4xl">
       <h2 className="font-serif text-3xl md:text-4xl text-center text-foreground mb-4">
         Event Details
       </h2>
-      <div className="flex items-center justify-center gap-4 mb-12">
+      <div className="flex items-center justify-center gap-4 mb-8">
         <div className="h-px w-12 bg-primary/40" />
         <span className="text-primary">✦</span>
         <div className="h-px w-12 bg-primary/40" />
