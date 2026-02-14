@@ -18,7 +18,7 @@ const EventDetailsSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="events" className="py-20 px-4 bg-background">
+    <section id="events" className="pt-4 pb-12 px-4 bg-background">
       <div className="container mx-auto max-w-3xl text-center">
 
         <h2 className="font-serif text-4xl text-foreground mb-6">

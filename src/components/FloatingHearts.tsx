@@ -14,7 +14,7 @@ const FloatingHearts = () => {
   );
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+   <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none -z-5">
       {hearts.map((heart) => (
         <span
           key={heart.id}

@@ -12,15 +12,15 @@ const HeroSection = () => {
   }, [opened]);
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: "url('/invite.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+   <section
+  id="home"
+  className="relative flex items-center justify-center overflow-hidden bg-cover bg-top md:bg-center"
+  style={{
+    backgroundImage: "url('/invite.png')",
+    minHeight: "100svh",
+  }}
+>
+
       {/* Soft royal overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40 backdrop-blur-[1px]" />
 
@@ -29,21 +29,25 @@ const HeroSection = () => {
         <div className="absolute inset-0 flex items-center justify-center z-50 transition-all duration-1000">
          <div className="text-center px-6 max-w-2xl">
 
-  <p className="text-xs md:text-sm tracking-[0.4em] uppercase text-foreground/60 mb-6">
-    Together with their families
-  </p>
+{/* Top Line */}
+<p className="font-serif text-[11px] md:text-sm tracking-[0.35em] uppercase text-primary mb-6">
+  Together with their families
+</p>
 
-  <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-8 font-light">
-    cordially invite you to join
-    <br />
-    the joyous celebration of their union
-    <br />
-    as they begin their journey of forever.
-  </p>
+{/* Main Invitation Text */}
+<p className="font-serif italic text-base md:text-lg text-primary leading-relaxed mb-10">
+  cordially invite you to join
+  <br />
+  the joyous celebration of their union
+  <br />
+  as they begin their journey of forever.
+</p>
 
-  <h2 className="font-serif text-7xl md:text-8xl text-primary mb-4 tracking-[0.15em]">
-    S & V
-  </h2>
+{/* Royal Initials */}
+<h2 className="font-serif text-7xl md:text-8xl text-primary mb-4 tracking-[0.2em]">
+  S & V
+</h2>
+
 
   <div className="flex items-center justify-center gap-4 mb-10">
     <div className="h-px w-20 bg-primary/40" />
