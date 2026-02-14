@@ -16,7 +16,7 @@ const VenueSection = () => (
         <div className="h-px w-12 bg-primary/40" />
       </div>
 
-      <div className="bg-card rounded-2xl shadow-lg overflow-hidden border border-border/50">
+      <div className="bg-card rounded-2xl shadow-lg overflow-hidden border border-border/50  relative z-10">
         {/* Map */}
         <div className="w-full h-64 md:h-80">
           <iframe

@@ -7,7 +7,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (opened) {
-      setTimeout(() => setVisible(true), 300);
+      setTimeout(() => setVisible(true), 400);
     }
   }, [opened]);
 
@@ -16,35 +16,56 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, hsl(340 50% 97%) 0%, hsl(345 60% 88%) 50%, hsl(340 50% 94%) 100%)",
+        backgroundImage: "url('/invite.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      {/* 💌 Invitation Cover */}
+      {/* Soft royal overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40 backdrop-blur-[1px]" />
+
+      {/* 💌 ROYAL INVITATION COVER */}
       {!opened && (
-        <div className="absolute inset-0 bg-rose-100 flex flex-col items-center justify-center z-50 transition-all duration-1000">
-          <div className="text-center">
-            <h2 className="font-serif text-4xl md:text-5xl text-primary mb-6">
-              S & V
-            </h2>
+        <div className="absolute inset-0 flex items-center justify-center z-50 transition-all duration-1000">
+         <div className="text-center px-6 max-w-2xl">
 
-            <p className="uppercase tracking-[0.4em] text-sm text-muted-foreground mb-8">
-              You’re Invited
-            </p>
+  <p className="text-xs md:text-sm tracking-[0.4em] uppercase text-foreground/60 mb-6">
+    Together with their families
+  </p>
 
-            <button
-              onClick={() => setOpened(true)}
-              className="px-8 py-3 bg-primary text-white rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              Open Invitation
-            </button>
-          </div>
+  <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-8 font-light">
+    cordially invite you to join
+    <br />
+    the joyous celebration of their union
+    <br />
+    as they begin their journey of forever.
+  </p>
+
+  <h2 className="font-serif text-7xl md:text-8xl text-primary mb-4 tracking-[0.15em]">
+    S & V
+  </h2>
+
+  <div className="flex items-center justify-center gap-4 mb-10">
+    <div className="h-px w-20 bg-primary/40" />
+    <span className="text-primary text-xl">✦</span>
+    <div className="h-px w-20 bg-primary/40" />
+  </div>
+
+  <button
+    onClick={() => setOpened(true)}
+    className="px-12 py-3 bg-primary text-white rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 tracking-wide"
+  >
+    Open Invitation
+  </button>
+</div>
+
         </div>
       )}
 
-      {/* 💍 Actual Hero Content */}
+      {/* 💍 REVEALED HERO CONTENT */}
       {opened && (
         <>
+          {/* Top Left Monogram */}
           <p className="absolute top-6 left-6 font-serif text-xl text-primary font-semibold tracking-wide z-20">
             S & V
           </p>
@@ -56,7 +77,8 @@ const HeroSection = () => {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="mx-auto mb-8 mt-8 w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-card shadow-2xl">
+            {/* Couple Image */}
+            <div className="mx-auto mb-8 mt-8 w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl">
               <img
                 src="/couple-photo.jpeg"
                 alt="Siddharthan & Varsha"
@@ -64,21 +86,26 @@ const HeroSection = () => {
               />
             </div>
 
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-foreground font-bold mb-3 leading-tight">
+            {/* Full Names */}
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-foreground font-bold mb-3 leading-tight drop-shadow-md">
               Siddharthan <span className="text-primary">&</span> Varsha
             </h1>
 
-            <p className="text-muted-foreground text-lg md:text-xl font-light mb-2">
-              February 21 & 22, 2026 • Chennai
-            </p>
+            {/* Decorative Line */}
+            <div className="flex items-center justify-center gap-4 my-6">
+              <div className="h-px w-16 bg-primary/40" />
+              <span className="text-primary text-2xl">♥</span>
+              <div className="h-px w-16 bg-primary/40" />
+            </div>
 
+            {/* Scroll */}
             <button
               onClick={() =>
                 document
                   .querySelector("#countdown")
                   ?.scrollIntoView({ behavior: "smooth" })
               }
-              className="mt-12 animate-bounce text-primary/60 hover:text-primary transition-colors"
+              className="mt-10 animate-bounce text-primary hover:text-primary/70 transition-colors"
             >
               <ChevronDown className="w-8 h-8 mx-auto" />
             </button>
