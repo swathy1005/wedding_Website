@@ -120,8 +120,8 @@ const HeroSection = () => {
             }`}
           >
             {/* Royal Initials */}
-            <h2 className="font-serif text-6xl md:text-7xl text-primary mb-4 tracking-[0.2em]">
-              S & V
+            <h2 className="font-serif text-6xl md:text-5xl text-primary mb-2 tracking-[0.2em]">
+              Join us to celebrate wedding of 
             </h2>
 
             <div className="flex items-center justify-center gap-4 mb-8">
