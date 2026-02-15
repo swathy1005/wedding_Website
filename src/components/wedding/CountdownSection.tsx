@@ -10,9 +10,8 @@ interface TimeLeft {
 const getTimeLeft = (target: Date): TimeLeft => {
   const diff = target.getTime() - Date.now();
 
-  if (diff <= 0) {
+  if (diff <= 0)
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  }
 
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -37,59 +36,50 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
   </div>
 );
 
-const CountdownTimer = ({ target }: { target: Date }) => {
-  const [time, setTime] = useState(getTimeLeft(target));
+const CountdownSection = () => {
+  const [time, setTime] = useState(getTimeLeft(WEDDING));
 
   useEffect(() => {
     const id = setInterval(() => {
-      setTime(getTimeLeft(target));
+      setTime(getTimeLeft(WEDDING));
     }, 1000);
 
     return () => clearInterval(id);
-  }, [target]);
+  }, []);
 
-  return (
-    <div className="relative z-10 bg-secondary/50 backdrop-blur-sm rounded-2xl p-8 text-center border border-border/50">
-      <div className="flex justify-center gap-3 md:gap-5">
-        <TimeUnit value={time.days} label="Days" />
-        <TimeUnit value={time.hours} label="Hours" />
-        <TimeUnit value={time.minutes} label="Mins" />
-        <TimeUnit value={time.seconds} label="Secs" />
-      </div>
-    </div>
-  );
-};
-
-const CountdownSection = () => {
   return (
     <section
       id="countdown"
-      className="relative pb-16 pt-14 px-4 overflow-hidden"
+      className="relative py-20 px-4"
     >
-      <div className="container mx-auto max-w-4xl text-center relative">
+      {/* 💕 LEFT STICKER (Fully Visible) */}
+      <img
+        src="/couple_waiting.png"
+        alt="Waiting Couple"
+        className="absolute left-4 md:left-12 top-36 md:top-40 w-20 md:w-32 pointer-events-none select-none z-0"
+      />
 
-        {/* Heading */}
+      {/* Main Content */}
+      <div className="relative z-10 container mx-auto max-w-4xl text-center">
         <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
           Counting Down to Forever
         </h2>
 
-        {/* Divider */}
         <div className="flex items-center justify-center gap-4 mb-12">
           <div className="h-px w-12 bg-primary/40" />
           <span className="text-primary">✦</span>
           <div className="h-px w-12 bg-primary/40" />
         </div>
 
-        {/* 💕 Sticker in FRONT */}
-        <img
-          src="/couple_waiting.png"
-          alt="Couple Sticker"
-          className="absolute left-[-30px] md:left-[-50px] top-[65%] -translate-y-1/2 w-32 md:w-48 pointer-events-none select-none z-30 drop-shadow-xl"
-        />
-
-        {/* Timer */}
-        <CountdownTimer target={WEDDING} />
-
+        {/* Timer Box */}
+        <div className="bg-secondary/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-md">
+          <div className="flex justify-center gap-3 md:gap-5">
+            <TimeUnit value={time.days} label="Days" />
+            <TimeUnit value={time.hours} label="Hours" />
+            <TimeUnit value={time.minutes} label="Mins" />
+            <TimeUnit value={time.seconds} label="Secs" />
+          </div>
+        </div>
       </div>
     </section>
   );
