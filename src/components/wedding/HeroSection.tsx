@@ -50,7 +50,7 @@ const HeroSection = () => {
         playsInline
       />
 
-      {/* 🎵 Music Control Button */}
+      {/* 🎵 Music Button */}
       {opened && (
         <button
           onClick={toggleMusic}
@@ -64,7 +64,7 @@ const HeroSection = () => {
         </button>
       )}
 
-      {/* Soft Royal Overlay */}
+      {/* Soft Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40 backdrop-blur-[1px]" />
 
       {/* 💌 INVITATION COVER */}
@@ -119,11 +119,12 @@ const HeroSection = () => {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            {/* Royal Initials */}
-            <h2 className="font-serif text-6xl md:text-5xl text-primary mb-2 tracking-[0.2em]">
-              Join us to celebrate wedding of 
+            {/* Small Single Line Heading */}
+            <h2 className="font-serif text-sm md:text-lg text-primary/90 mb-6 tracking-[0.08em] text-center whitespace-nowrap">
+              Join us to celebrate the wedding of
             </h2>
 
+            {/* Divider */}
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="h-px w-20 bg-primary/40" />
               <span className="text-primary text-xl">✦</span>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Calendar, Clock } from "lucide-react";
 
 const events = [
   {
@@ -18,60 +17,55 @@ const EventDetailsSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section id="events" className="relative z-10 pt-4 pb-12 px-4 bg-background">
-      <div className="container mx-auto max-w-3xl text-center">
+    <section
+      id="events"
+      className="relative py-20 px-4 overflow-hidden"
+    >
+      <div className="container mx-auto max-w-4xl text-center relative">
 
-        <h2 className="font-serif text-4xl text-foreground mb-6">
+        {/* 💕 Top Right Celebration Sticker */}
+        <img
+          src="/couple celebration.png"
+          alt="Celebration Sticker"
+          className="absolute right-[-20px] md:right-[-40px] top-[-10px] md:top-[-20px] w-28 md:w-44 pointer-events-none select-none z-20"
+        />
+
+        {/* Heading */}
+        <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
           The Celebrations
         </h2>
 
+        {/* Divider */}
         <div className="flex items-center justify-center gap-4 mb-12">
-          <div className="h-px w-16 bg-primary/40" />
-          <span className="text-primary text-xl">♥</span>
-          <div className="h-px w-16 bg-primary/40" />
+          <div className="h-px w-12 bg-primary/40" />
+          <span className="text-primary">♥</span>
+          <div className="h-px w-12 bg-primary/40" />
         </div>
 
+        {/* Event Cards */}
         <div className="space-y-6">
-          {events.map((event, index) => {
-            const isOpen = activeIndex === index;
+          {events.map((e, i) => (
+            <div
+              key={i}
+              className="bg-card rounded-2xl p-6 shadow-md border border-border cursor-pointer transition-all duration-300 hover:shadow-lg"
+              onClick={() =>
+                setActiveIndex(activeIndex === i ? null : i)
+              }
+            >
+              <h3 className="font-serif text-xl text-foreground">
+                {e.title}
+              </h3>
 
-            return (
-              <div
-                key={index}
-                className="bg-card border border-border/50 rounded-2xl shadow-lg overflow-hidden transition-all duration-500"
-              >
-                {/* Clickable Header */}
-                <button
-                  onClick={() =>
-                    setActiveIndex(isOpen ? null : index)
-                  }
-                  className="w-full py-6 text-center font-serif text-2xl text-foreground hover:text-primary transition"
-                >
-                  {event.title}
-                </button>
-
-                {/* Reveal Content */}
-                <div
-                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    isOpen ? "max-h-40 opacity-100 pb-6" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="space-y-4 text-center">
-                    <div className="flex items-center justify-center gap-3">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <span className="text-foreground/80">{event.date}</span>
-                    </div>
-
-                    <div className="flex items-center justify-center gap-3">
-                      <Clock className="w-5 h-5 text-primary" />
-                      <span className="text-foreground/80">{event.time}</span>
-                    </div>
-                  </div>
+              {activeIndex === i && (
+                <div className="mt-4 text-muted-foreground">
+                  <p>{e.date}</p>
+                  <p>{e.time}</p>
                 </div>
-              </div>
-            );
-          })}
+              )}
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
